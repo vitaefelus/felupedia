@@ -5,6 +5,7 @@
 
 namespace App\Entity;
 
+use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,6 +17,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Article
 {
+    /**
+     * Use constants to define configuration options that rarely change instead
+     * of specifying them in app/config/config.yml.
+     * See http://symfony.com/doc/current/best_practices/configuration.html#constants-vs-configuration-options.
+     *
+     * @constant int NUMBER_OF_ITEMS
+     */
+    const NUMBER_OF_ITEMS = 10;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -80,6 +89,17 @@ class Article
      * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
+
+    /**
+     * Code - sluggified title for URL.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Gedmo\Slug(fields={"title"})
+     */
+    private $code;
 
     /**
      * Article constructor.
@@ -251,6 +271,26 @@ class Article
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return Article
+     */
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
 
         return $this;
     }

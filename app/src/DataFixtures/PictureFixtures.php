@@ -22,9 +22,11 @@ class PictureFixtures extends AbstractBaseFixtures
      */
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(15, 'pictures', function ($i) {
+        $this->createMany(20, 'pictures', function ($i) {
             $picture = new Picture();
-            $picture->setSrc('fixture.jpg');
+            $pictureValue = 0 === $i % 2 ? 'fixture.jpg' : '';
+            $picture->setSrc($pictureValue);
+            $picture->setDescription($this->faker->sentence);
 
             return $picture;
         });

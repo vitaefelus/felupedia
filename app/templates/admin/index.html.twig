@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title.admin_panel'|trans }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="article">{{ 'title.admin_panel'|trans }}</h1>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-red" href="article">{{ 'label.articles'|trans }}</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-red" href="user">{{ 'label.users'|trans }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Picture Entity.
+ */
 
 namespace App\Entity;
 
@@ -21,6 +24,11 @@ class Picture
      * @ORM\Column(type="string", length=64)
      */
     private $src;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    private $description;
 
     /**
      * @return int|null
@@ -46,6 +54,26 @@ class Picture
     public function setSrc(string $src): self
     {
         $this->src = $src;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return Picture
+     */
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

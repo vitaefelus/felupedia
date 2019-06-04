@@ -1,0 +1,93 @@
+* {
+  transition-duration: .2s;
+  transition-timing-function: ease;
+}
+body {
+  background-color: #fafafa;
+  color: #3b3c37;
+  font-family: Raleway;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+hr {
+  border-color: #8aa29e;
+}
+.container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.felupedia {
+  letter-spacing: 5px;
+  text-transform: lowercase;
+  color: #fafafa;
+}
+.felupedia span {
+  color: #db5461;
+}
+.felupedia:hover {
+  color: #db5461;
+}
+.felupedia:hover span {
+  color: #fafafa;
+}
+.btn-red {
+  background-color: transparent;
+  color: #db5461;
+  border-color: #db5461;
+}
+.btn-red:hover {
+  background-color: #db5461;
+  color: #fafafa;
+}
+figure {
+  border: 1px solid #8aa29e;
+  padding: 5px;
+  max-width: 300px;
+}
+figure figcaption {
+  text-align: center;
+}
+.navbar {
+  background-color: #3b3c37;
+}
+.navbar a {
+  color: #fafafa;
+}
+.navbar a:hover {
+  color: #db5461;
+}
+.footer-wrapper {
+  display: flex;
+  justify-content: center;
+  background-color: #3b3c37;
+}
+.footer-wrapper footer {
+  flex: 0 0 auto;
+  display: flex;
+  padding: 1em;
+  margin: 1em;
+  width: 80%;
+  justify-content: center;
+}
+.footer-wrapper footer div p {
+  margin-bottom: 0;
+  color: #fafafa;
+}
+.container-article {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+h1.article {
+  font-weight: 700;
+  font-size: 40px;
+}
+.paragraph h5 {
+  padding: 0 15px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 18px;
+}
+.paragraph p {
+  text-indent: 30px;
+}

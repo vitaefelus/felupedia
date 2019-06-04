@@ -1,0 +1,77 @@
+//color palette
+
+@snow: #FAFAFA;    //almost white
+@glitter: #E3F2FD; //sky blue
+@red: #DB5461;     //cherrish red
+@granite: #3b3c37; //granite gray
+@cadet: #8AA29E;   //blueish grey
+
+* {
+  transition-duration: .2s;
+  transition-timing-function: ease;
+}
+
+body {
+  background-color: @snow;
+  color: @granite;
+  font-family: Raleway;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+hr {
+  border-color: @cadet;
+}
+
+.container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.felupedia {
+  letter-spacing: 5px;
+  text-transform: lowercase;
+  color: @snow;
+
+  span {
+    color: @red;
+  }
+
+  &:hover {
+    color: @red;
+
+    & span {
+      color: @snow;
+    }
+  }
+}
+
+.btn {
+
+  &-red {
+    background-color: transparent;
+    color: @red;
+    border-color: @red;
+
+    &:hover {
+      background-color: @red;
+      color: @snow;
+    }
+  }
+}
+
+figure {
+  border: 1px solid @cadet;
+  padding: 5px;
+  max-width: 300px;
+
+  figcaption {
+    text-align: center;
+  }
+}
+
+
+@import "navbar.less";
+@import "footer.less";
+@import "article.less";

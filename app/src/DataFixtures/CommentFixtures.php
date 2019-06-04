@@ -14,7 +14,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  *
  * @method createMany(int $int, string $string, \Closure $param)
  */
-class CommentFixtures extends AbstractBaseFixtures
+class CommentFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
      * Load data.
@@ -28,7 +28,7 @@ class CommentFixtures extends AbstractBaseFixtures
             $comment->setContent($this->faker->text);
             $comment->setIsVisible($this->faker->boolean);
             $comment->setArticle($this->getRandomReference('articles'));
-            $comment->setAuthor($this->getRandomReference('users'));
+            $comment->setAuthor($this->getRandomReference('admins'));
 
             return $comment;
         });

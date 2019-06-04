@@ -39,7 +39,7 @@ class Paragraph
     private $article;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Picture")
      */
     private $picture;
 

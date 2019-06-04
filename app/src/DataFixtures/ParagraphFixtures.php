@@ -6,6 +6,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Paragraph;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
@@ -13,7 +14,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  *
  * @method createMany(int $int, string $string, \Closure $param)
  */
-class ParagraphFixtures extends AbstractBaseFixtures
+class ParagraphFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
      * Load data.

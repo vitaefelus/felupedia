@@ -1,10 +1,5 @@
-//color palette
-
-@snow: #FAFAFA;    //almost white
-@glitter: #E3F2FD; //sky blue
-@red: #DB5461;     //cherrish red
-@granite: #3b3c37; //granite gray
-@cadet: #8AA29E;   //blueish grey
+@import 'variables.less';
+@import 'mixins.less';
 
 * {
   transition-duration: .2s;
@@ -18,6 +13,7 @@ body {
   display: flex;
   height: 100%;
   flex-direction: column;
+  align-content: flex-end;
 }
 
 hr {
@@ -27,11 +23,20 @@ hr {
 .container {
   padding-top: 30px;
   padding-bottom: 30px;
+
+  &-fluid {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    flex: 1 0 auto;
+  }
+}
+
+.container-fix {
+  min-height:70vh;
 }
 
 .felupedia {
-  letter-spacing: 5px;
-  text-transform: lowercase;
+  .felupedia-main();
   color: @snow;
 
   span {
@@ -45,7 +50,26 @@ hr {
       color: @snow;
     }
   }
+
+  &-reverse {
+    .felupedia-main();
+    color: @red;
+
+    span {
+      color: @granite;
+    }
+
+    &:hover {
+      color: @granite;
+
+      & span {
+        color: @red;
+      }
+    }
+  }
 }
+
+
 
 .btn {
 

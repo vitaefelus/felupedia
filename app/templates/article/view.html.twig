@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container container-article">
+    <div class="container container-article container-fix">
         <h1 class="article">{{ article.title }}</h1>
         <hr>
         {% if article is defined and article|length and article.getParagraphs()|length %}

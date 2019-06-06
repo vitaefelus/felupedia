@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title.homepage'|trans }}
+{% endblock %}
+
+{% block body %}
+    <div class="container container-fix">
+        <h1 class="felupedia-reverse felupedia-heading"><span>felu</span>pedia</h1>
+        <h2>{{ 'sentence.welcome'|trans }}</h2>
+        <form>
+            <input type="text">
+        </form>
+    </div>
+{% endblock %}

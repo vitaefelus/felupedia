@@ -2,6 +2,10 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="pl" datatype="plaintext" original="file.ext">
         <body>
+            <trans-unit id="sentence.welcome">
+                <source>sentence.welcome</source>
+                <target>Twoja nowa encyklopedia</target>
+            </trans-unit>
             <trans-unit id="title.article_list">
                 <source>title.article_list</source>
                 <target>Lista artykułów</target>

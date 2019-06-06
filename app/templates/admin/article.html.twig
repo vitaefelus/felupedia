@@ -5,50 +5,52 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title.article_list'|trans }}</h1>
-    {% if pagination is defined and pagination|length %}
+    <div class="container container-fix"
+        <h1>{{ 'title.article_list'|trans }}</h1>
+        {% if pagination is defined and pagination|length %}
 
-        <div class="navigation text-center">
-            {{ knp_pagination_render(pagination) }}
-        </div>
+            <div class="navigation text-center">
+                {{ knp_pagination_render(pagination) }}
+            </div>
 
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 't.createdAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 't.updatedAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 't.title') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.is_accepted'|trans, 't.isAccepted') }}</th>
-                <th>{{ 'label.actions'|trans }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for article in pagination %}
-                {% if article.getParagraphs()|length %}
-                    <tr>
-                        <td>{{ article.createdAt|localizeddate }}</td>
-                        <td>{{ article.updatedAt|localizeddate }}</td>
-                        <td>{{ article.title }}</td>
-                        <td>{{ article.isAccepted }}</td>
-                        <td>
-                            <a href="{{ url('article_view', {id: article.id}) }}" title="{{ 'action.view'|trans }}">
-                                {{ 'action.view'|trans }}
-                            </a>
-                        </td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-            </tbody>
-        </table>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 't.createdAt') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 't.updatedAt') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 't.title') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'label.is_accepted'|trans, 't.isAccepted') }}</th>
+                    <th>{{ 'label.actions'|trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for article in pagination %}
+                    {% if article.getParagraphs()|length %}
+                        <tr>
+                            <td>{{ article.createdAt|localizeddate }}</td>
+                            <td>{{ article.updatedAt|localizeddate }}</td>
+                            <td>{{ article.title }}</td>
+                            <td>{{ article.isAccepted }}</td>
+                            <td>
+                                <a href="{{ url('article_view', {id: article.id}) }}" title="{{ 'action.view'|trans }}">
+                                    {{ 'action.view'|trans }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
 
-        <div class="navigation text-center">
-            {{ knp_pagination_render(pagination) }}
-        </div>
+            <div class="navigation text-center">
+                {{ knp_pagination_render(pagination) }}
+            </div>
 
-    {% else %}
-        <p>
-            {{ 'message.empty_list'|trans }}
-        </p>
-    {% endif %}
+        {% else %}
+            <p>
+                {{ 'message.empty_list'|trans }}
+            </p>
+        {% endif %}
+    </div>
 
 {% endblock %}

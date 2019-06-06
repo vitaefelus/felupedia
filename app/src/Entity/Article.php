@@ -58,6 +58,11 @@ class Article
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Paragraph", mappedBy="article")
+     *
+     * @Assert\Count(
+     *     min=1,
+     *     minMessage = '{{ 'error.too_little_paragraphs' }}'
+     * )
      */
     private $paragraphs;
 

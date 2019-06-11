@@ -40,6 +40,17 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
+     * Query users that are not active.
+     *
+     * @return QueryBuilder
+     */
+    public function queryNotActive(): QueryBuilder
+    {
+        return $this->getOrCreateQueryBuilder()
+            ->where('t.isActive', 0);
+    }
+
+    /**
      * Get or create new query builder.
      *
      * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder

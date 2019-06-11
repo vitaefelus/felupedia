@@ -55,23 +55,6 @@ class UserFixtures extends AbstractBaseFixtures
             return $user;
         });
 
-        $this->createMany(5, 'moderators', function ($i) {
-            $user = new User();
-            $user->setUsername($this->faker->userName);
-            $user->setEmail(sprintf('moderator%d@example.com', $i));
-            $user->setFirstName($this->faker->firstName);
-            $user->setLastName($this->faker->lastName);
-            $user->setTitle($this->faker->jobTitle);
-            $user->setIsActive($this->faker->boolean);
-            $user->setRoles(['ROLE_USER', 'ROLE_MODERATOR']);
-            $user->setPassword($this->passwordEncoder->encodePassword(
-                $user,
-                'mod1234'
-            ));
-
-            return $user;
-        });
-
         $this->createMany(2, 'admins', function ($i) {
             $user = new User();
             $user->setUsername($this->faker->userName);
@@ -80,7 +63,7 @@ class UserFixtures extends AbstractBaseFixtures
             $user->setLastName($this->faker->lastName);
             $user->setTitle($this->faker->jobTitle);
             $user->setIsActive($this->faker->boolean);
-            $user->setRoles(['ROLE_USER', 'ROLE_MODERATOR', 'ROLE_ADMIN']);
+            $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
             $user->setPassword($this->passwordEncoder->encodePassword(
                 $user,
                 'admin1234'

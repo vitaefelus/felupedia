@@ -7,7 +7,8 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -38,6 +39,29 @@ class ArticleRepository extends ServiceEntityRepository
     {
         return $this->getOrCreateQueryBuilder()
             ->orderBy('t.updatedAt', 'DESC');
+    }
+
+    /**
+     * Query only not accepted users.
+     *
+     * @return QueryBuilder
+     */
+    public function queryNotAccepted(): QueryBuilder
+    {
+        return $this->getOrCreateQueryBuilder()
+            ->where('t.isAccepted', 0);
+    }
+
+    /**
+     * @param Article $article
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function save(Article $article): void
+    {
+        $this->_em->persist($article);
+        $this->_em->flush($article);
     }
 
     /**

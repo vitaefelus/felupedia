@@ -1,4 +1,7 @@
 <?php
+/**
+ * Comment Repository.
+ */
 
 namespace App\Repository;
 
@@ -14,9 +17,28 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class CommentRepository extends ServiceEntityRepository
 {
+    /**
+     * CommentRepository constructor.
+     *
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Comment::class);
+    }
+
+    /**
+     * Save record.
+     *
+     * @param \App\Entity\Comment $comment Comment entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Comment $comment): void
+    {
+        $this->_em->persist($comment);
+        $this->_em->flush($comment);
     }
 
     // /**

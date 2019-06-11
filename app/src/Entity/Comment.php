@@ -24,6 +24,12 @@ class Comment
 
     /**
      * @ORM\Column(type="text")
+     *
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     max=1000,
+     *     maxMessage = "error.too_long_comment"
+     * )
      */
     private $content;
 
@@ -39,7 +45,10 @@ class Comment
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Article")
+     * @ORM\ManyToOne(
+     *     targetEntity="App\Entity\Article",
+     *     inversedBy="comments"
+     * )
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;

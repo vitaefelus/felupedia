@@ -21,18 +21,16 @@ hr {
 }
 
 .container {
-  padding-top: 30px;
-  padding-bottom: 30px;
 
   &-fluid {
-    padding-top: 30px;
-    padding-bottom: 30px;
     flex: 1 0 auto;
   }
 }
 
 .container-fix {
-  min-height:70vh;
+  min-height:80vh;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .felupedia {
@@ -53,17 +51,17 @@ hr {
 
   &-reverse {
     .felupedia-main();
-    color: @red;
+    color: @granite;
 
     span {
-      color: @granite;
+      color: @red;
     }
 
     &:hover {
-      color: @granite;
+      color: @red;
 
       & span {
-        color: @red;
+        color: @granite;
       }
     }
   }

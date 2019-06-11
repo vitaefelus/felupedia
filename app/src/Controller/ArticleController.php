@@ -6,7 +6,10 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Repository\ArticleRepository;
+use App\Form\CommentType;
+use App\Repository\CommentRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,6 +72,56 @@ class ArticleController extends AbstractController
         return $this->render(
             'article/view.html.twig',
             ['article' => $article]
+        );
+    }
+
+    /**
+     * New action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
+     * @param \App\Repository\CommentRepository         $commentRepository Comment repository
+     * @param ArticleRepository                         $articleRepository Article repository
+     * @param                                           $id                Id of article element
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/{id}/add-comment",
+     *     requirements={"id": "[1-9]\d*"},
+     *     methods={"GET", "POST"},
+     *     name="article_comment_new",
+     * )
+     */
+    public function addComment(Request $request, CommentRepository $commentRepository, ArticleRepository $articleRepository, $id): Response
+    {
+        $comment = new Comment();
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        $article = $articleRepository->find($id);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setCreatedAt(new \DateTime());
+            $comment->setUpdatedAt(new \DateTime());
+            $comment->setIsVisible(true);
+            $comment->setArticle($article);
+            $comment->setAuthor(null);
+            $commentRepository->save($comment);
+
+            return $this->redirectToRoute('article_view', ['id' => $comment->getArticle()->getId()]);
+        }
+
+        return $this->render(
+            'article/add-comment.html.twig',
+            [
+                'form' => $form->createView(),
+                'comment' => $comment,
+                'article' => $article,
+            ]
         );
     }
 }

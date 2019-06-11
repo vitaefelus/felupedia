@@ -11,6 +11,7 @@ use App\Repository\ArticleRepository;
 use App\Repository\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,6 +39,7 @@ class AdminController extends AbstractController
             'admin/index.html.twig'
         );
     }
+
     /**
      * List Users action.
      *
@@ -85,7 +87,7 @@ class AdminController extends AbstractController
         $pagination = $paginator->paginate(
             $repository->queryAll(),
             $request->query->getInt('page', 1),
-            Article::NUMBER_OF_ITEMS
+            $request->query->getInt('limit', 5)
         );
 
         return $this->render(
@@ -119,6 +121,48 @@ class AdminController extends AbstractController
         return $this->render(
             'admin/article.html.twig',
             ['pagination' => $pagination]
+        );
+    }
+
+    /**
+     * Accept article action.
+     *
+     * @param Request           $request
+     * @param Article           $article
+     * @param ArticleRepository $repository
+     *
+     * @return Response
+     *
+     * @throws \Exception
+     *
+     * @Route(
+     *     "/article/{id}/accept",
+     *     methods={"GET", "PUT"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="admin_accept_article"
+     * )
+     */
+    public function acceptArticle(Request $request, Article $article, ArticleRepository $repository): Response
+    {
+        $form = $this->createForm(FormType::class, $article, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $article->setUpdatedAt(new \DateTime());
+            $article->setIsAccepted(true);
+            $repository->save($article);
+
+            $this->addFlash('success', 'message.updated_successfully');
+
+            return $this->redirectToRoute('admin_list_articles');
+        }
+
+        return $this->render(
+            'admin/article-accept.html.twig',
+            [
+                'form' => $form->createView(),
+                'article' => $article,
+            ]
         );
     }
 }

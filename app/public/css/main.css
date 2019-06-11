@@ -14,17 +14,13 @@ body {
 hr {
   border-color: #8aa29e;
 }
-.container {
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
 .container-fluid {
-  padding-top: 30px;
-  padding-bottom: 30px;
   flex: 1 0 auto;
 }
 .container-fix {
-  min-height: 70vh;
+  min-height: 80vh;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 .felupedia {
   letter-spacing: 5px;
@@ -43,16 +39,16 @@ hr {
 .felupedia-reverse {
   letter-spacing: 5px;
   text-transform: lowercase;
-  color: #db5461;
+  color: #3b3c37;
 }
 .felupedia-reverse span {
-  color: #3b3c37;
+  color: #db5461;
 }
 .felupedia-reverse:hover {
-  color: #3b3c37;
+  color: #db5461;
 }
 .felupedia-reverse:hover span {
-  color: #db5461;
+  color: #3b3c37;
 }
 .btn-red {
   background-color: transparent;

@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -61,10 +62,23 @@ class Article
      *
      * @Assert\Count(
      *     min=1,
-     *     minMessage = '{{ 'error.too_little_paragraphs' }}'
+     *     minMessage = "error.too_little_paragraphs"
      * )
      */
     private $paragraphs;
+
+    /**
+     * Comments.
+     *
+     * @var Collection|null
+     *
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\Comment",
+     *     mappedBy="article",
+     *     fetch="EXTRA_LAZY"
+     * )
+     */
+    private $comments;
 
     /**
      * Created at.
@@ -169,6 +183,14 @@ class Article
     public function getTags(): Collection
     {
         return $this->tags;
+    }
+
+    /**
+     * @return Collection|null
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
     }
 
     /**

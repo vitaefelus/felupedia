@@ -5,8 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container container-fix"
+    <div class="container container-fix">
         <h1>{{ 'title.article_list'|trans }}</h1>
+        <div class="action-buttons">
+            <a class="btn btn-red" href="{{ path("admin_list_not_accepted_articles") }}">{{ 'button.view_not_accepted' }}</a>
+        </div>
         {% if pagination is defined and pagination|length %}
 
             <div class="navigation text-center">
@@ -21,6 +24,7 @@
                     <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 't.title') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'label.is_accepted'|trans, 't.isAccepted') }}</th>
                     <th>{{ 'label.actions'|trans }}</th>
+                    <th>{{ 'label.accept'|trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -30,11 +34,24 @@
                             <td>{{ article.createdAt|localizeddate }}</td>
                             <td>{{ article.updatedAt|localizeddate }}</td>
                             <td>{{ article.title }}</td>
-                            <td>{{ article.isAccepted }}</td>
+                            {% if article.isAccepted == '0' %}
+                                <td class="td-negative"></td>
+                            {% else %}
+                                <td class="td-positive">
+                                    <img class="icon" src="{{ asset('images/accept.png') }}">
+                                </td>
+                            {% endif %}
                             <td>
                                 <a href="{{ url('article_view', {id: article.id}) }}" title="{{ 'action.view'|trans }}">
                                     {{ 'action.view'|trans }}
                                 </a>
+                            </td>
+                            <td>
+                            {% if article.isAccepted=='0' %}
+                                <a href="{{ url('admin_accept_article', {id: article.id}) }}" title="{{ 'action.accept'|trans }}">
+                                    {{ 'action.accept'|trans }}
+                                </a>
+                            {% endif %}
                             </td>
                         </tr>
                     {% endif %}

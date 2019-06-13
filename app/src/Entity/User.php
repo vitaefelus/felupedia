@@ -38,19 +38,13 @@ class User implements UserInterface
      * @constant int NUMBER_OF_ITEMS
      */
     const NUMBER_OF_ITEMS = 10;
+
     /**
      * Role user.
      *
      * @var string
      */
     const ROLE_USER = 'ROLE_USER';
-
-    /**
-     * Role moderator.
-     *
-     * @var string
-     */
-    const ROLE_MODERATOR = 'ROLE_MODERATOR';
 
     /**
      * Role admin.
@@ -119,7 +113,7 @@ class User implements UserInterface
     /**
      * Password.
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=64)
      *
      * @Assert\NotBlank
      * @Assert\Length(
@@ -188,6 +182,12 @@ class User implements UserInterface
      * @Assert\NotBlank
      */
     private $username;
+
+    /**
+     * @Assert\NotBlank
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @return int|null
@@ -267,6 +267,14 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword;
     }
 
     /**

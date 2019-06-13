@@ -25,7 +25,7 @@ class ArticleFixtures extends AbstractBaseFixtures implements DependentFixtureIn
     {
         $this->createMany(10, 'articles', function ($i) {
             $article = new Article();
-            $article->setTitle($this->faker->word);
+            $article->setTitle($this->faker->sentence(2));
             $article->setIsAccepted($this->faker->boolean);
 
             $tags = $this->getRandomReferences(

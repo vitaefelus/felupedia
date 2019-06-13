@@ -25,10 +25,12 @@
                 <a class="nav-link" href="/admin">Admin</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="{{ 'input_placeholder.search'|trans }}" aria-label="Search">
-            <button class="btn btn-red my-2 my-sm-0" type="submit">{{ 'button.search'|trans }}</button>
-        </form>
+        {% if app.user %}
+        <a class="btn btn-red" href="{{ url("security_logout") }}">{{ 'button.logout'|trans }}</a>
+        {% else %}
+        <a class="btn btn-red" href="{{ url("security_login") }}">{{ 'button.login'|trans }}</a>
+        <a class="btn btn-red" href="{{ url("security_register") }}">{{ 'button.register'|trans }}</a>
+        {% endif %}
     </div>
 </nav>
 <div class="container-fluid">

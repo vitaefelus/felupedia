@@ -1,20 +1,20 @@
 <?php
 /**
- * Comment type.
+ * Search type.
  */
 
 namespace App\Form;
 
-use App\Entity\Comment;
+use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType as Search;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class CommentType.
+ * Class CategoryType.
  */
-class CommentType extends AbstractType
+class SearchType extends AbstractType
 {
     /**
      * Builds the form.
@@ -30,10 +30,10 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
-            'content',
-            TextType::class,
+            'title',
+            Search::class,
             [
-                'label' => 'label.content',
+                'label' => 'label.search',
                 'required' => true,
                 'attr' => ['max_length' => 1000],
             ]
@@ -47,7 +47,7 @@ class CommentType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Comment::class]);
+        $resolver->setDefaults(['data_class' => Article::class]);
     }
 
     /**
@@ -60,6 +60,6 @@ class CommentType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'comment';
+        return 'article';
     }
 }

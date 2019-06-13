@@ -69,6 +69,12 @@ class ArticleController extends AbstractController
      */
     public function view(Article $article): Response
     {
+        if ('0' === $article->getIsAccepted()) {
+            $this->addFlash('warning', 'message.item_not_found');
+
+            return $this->redirectToRoute('article_index');
+        }
+
         return $this->render(
             'article/view.html.twig',
             ['article' => $article]
@@ -76,12 +82,43 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * New action.
+     * @param Request            $request
+     * @param ArticleRepository  $repository
+     * @param PaginatorInterface $paginator
+     * @param string             $title
+     *
+     * @return Response
+     *
+     * @Route(
+     *    "/filter/{title}",
+     *     requirements={"title":"[a-zA-Z]\d*"},
+     *     methods={"GET","POST"},
+     *     name="article_filter"
+     * )
+     */
+    public function filter(Request $request, ArticleRepository $repository, PaginatorInterface $paginator, $title): Response
+    {
+        //$titleToSearch = '/^.*'.$title.'.*$/';
+
+        $pagination = $paginator->paginate(
+            $repository->findBy(['title' => $title]),
+            $request->query->getInt('page', 1),
+            Article::NUMBER_OF_ITEMS
+        );
+
+        return $this->render(
+            'article/index.html.twig',
+            ['pagination' => $pagination]
+        );
+    }
+
+    /**
+     * Add comment action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
      * @param \App\Repository\CommentRepository         $commentRepository Comment repository
      * @param ArticleRepository                         $articleRepository Article repository
-     * @param                                           $id                Id of article element
+     * @param id                                        $id                Id of article element
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -109,7 +146,7 @@ class ArticleController extends AbstractController
             $comment->setUpdatedAt(new \DateTime());
             $comment->setIsVisible(true);
             $comment->setArticle($article);
-            $comment->setAuthor(null);
+            $comment->setAuthor($this->getUser());
             $commentRepository->save($comment);
 
             return $this->redirectToRoute('article_view', ['id' => $comment->getArticle()->getId()]);

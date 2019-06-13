@@ -5,7 +5,6 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -53,7 +52,6 @@ class Article
      *     inversedBy="articles",
      *     orphanRemoval=true
      * )
-     * @ORM\JoinTable(name="articles_list")
      */
     private $tags;
 

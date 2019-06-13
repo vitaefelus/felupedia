@@ -7,12 +7,8 @@
 {% block body %}
     <div class="container container-fix">
     {{ form_start(form) }}
-        {{ form_row(form.username) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.plainPassword.first) }}
-        {{ form_row(form.plainPassword.second) }}
-
-    <button type="submit">Register!</button>
+    {{ form_widget(form) }}
+    <button class="btn btn-red" type="submit">Register!</button>
     {{ form_end(form) }}
     </div>
 {% endblock body %}

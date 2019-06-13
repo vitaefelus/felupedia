@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
 /**
  * Class User.
@@ -33,7 +33,7 @@ class User implements UserInterface
     /**
      * Use constants to define configuration options that rarely change instead
      * of specifying them in app/config/config.yml.
-     * See http://symfony.com/doc/current/best_practices/configuration.html#constants-vs-configuration-options
+     * See http://symfony.com/doc/current/best_practices/configuration.html#constants-vs-configuration-options.
      *
      * @constant int NUMBER_OF_ITEMS
      */
@@ -184,12 +184,6 @@ class User implements UserInterface
     private $username;
 
     /**
-     * @Assert\NotBlank
-     * @Assert\Length(max=4096)
-     */
-    private $plainPassword;
-
-    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -267,14 +261,6 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->username;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPlainPassword(): string
-    {
-        return $this->plainPassword;
     }
 
     /**

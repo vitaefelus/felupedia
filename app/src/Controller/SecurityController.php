@@ -87,8 +87,14 @@ class SecurityController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
+            $user->setUsername($user->getUsername());
+            $user->setEmail($user->getEmail());
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $user->getPassword()
+                )
+            );
 
             $repository->save($user);
 

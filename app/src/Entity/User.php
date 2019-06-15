@@ -78,7 +78,7 @@ class User implements UserInterface
      *
      * @ORM\Column(type="datetime")
      *
-     * @Assert\DateTime
+     * @Assert\DateTime(groups={"register"})
      */
     private $createdAt;
 
@@ -91,7 +91,7 @@ class User implements UserInterface
      *
      * @ORM\Column(type="datetime")
      *
-     * @Assert\DateTime
+     * @Assert\DateTime(groups={"register"})
      */
     private $updatedAt;
 
@@ -105,8 +105,8 @@ class User implements UserInterface
      *     length=128,
      * )
      *
-     * @Assert\NotBlank
-     * @Assert\Email
+     * @Assert\NotBlank(groups={"register"})
+     * @Assert\Email(groups={"register"})
      */
     private $email;
 
@@ -115,11 +115,11 @@ class User implements UserInterface
      *
      * @ORM\Column(type="string", length=64)
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(groups={"register"})
      * @Assert\Length(
      *     min="3",
      *     max="255",
-     * )
+     * )(groups={"register"})
      *
      * @SecurityAssert\UserPassword
      */
@@ -137,11 +137,11 @@ class User implements UserInterface
      *
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(groups={"register"})
      * @Assert\Length(
      *     min="3",
      *     max="255",
-     * )
+     * )(groups={"register"})
      */
     private $firstName;
 
@@ -150,11 +150,11 @@ class User implements UserInterface
      *
      * @ORM\Column(type="string", length=64)
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(groups={"register"})
      * @Assert\Length(
      *     min="0",
      *     max="64",
-     * )
+     * )(groups={"register"})
      */
     private $title;
 
@@ -163,11 +163,11 @@ class User implements UserInterface
      *
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(groups={"register"})
      * @Assert\Length(
      *     min="0",
      *     max="255",
-     * )
+     * )(groups={"register"})
      */
     private $lastName;
 
@@ -179,7 +179,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=64)
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(groups={"register"})
      */
     private $username;
 

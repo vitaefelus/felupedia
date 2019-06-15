@@ -8,8 +8,10 @@
     <div class="container container-fix">
         <h1 class="felupedia-reverse felupedia-heading"><span>felu</span>pedia</h1>
         <h2>{{ 'sentence.welcome'|trans }}</h2>
-        <form>
-            <input type="text">
+        <form action="{{ path("article_index") }}" method="GET">
+            <label for="filter">{{ 'label.search'|trans }}</label>
+            <input name="filter" type="text">
+            <button class="btn btn-red" type="submit">{{ 'button.search'|trans }}</button>
         </form>
     </div>
 {% endblock %}

@@ -52,6 +52,11 @@ class Article
      *     inversedBy="articles",
      *     orphanRemoval=true
      * )
+     *
+     * @Assert\Count(
+     *     min=1,
+     *     minMessage = "error.too_little_tags"
+     * )
      */
     private $tags;
 

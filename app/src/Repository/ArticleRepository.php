@@ -11,6 +11,7 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method Article|null find($id, $lockMode = null, $lockVersion = null)
@@ -49,7 +50,35 @@ class ArticleRepository extends ServiceEntityRepository
     public function queryNotAccepted(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->where('t.isAccepted', 0);
+            ->where('t.isAccepted = 0');
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function queryAccepted(): QueryBuilder
+    {
+        return $this->getOrCreateQueryBuilder()
+            ->where('t.isAccepted = 1')
+            ->orderBy('t.updatedAt', 'DESC');
+    }
+
+    /**
+     * @param string $term
+     *
+     * @return QueryBuilder
+     */
+    public function queryFilter(Request $request): QueryBuilder
+    {
+        // return $this->getOrCreateQueryBuilder()
+        //    ->where('t.getTags() LIKE :searchPhrase OR t.getTitle() LIKE :searchPhrase')
+        //  ->setParameter('searchPhrase', '%'.$term.'%')
+        //->orderBy('t.title', 'ASC');
+
+        return $this->getOrCreateQueryBuilder()
+            ->where('t.title LIKE :searchPhrase')
+            ->setParameter('searchPhrase', '%'.$request->query->getAlnum('filter').'%')
+            ->orderBy('t.title', 'ASC');
     }
 
     /**

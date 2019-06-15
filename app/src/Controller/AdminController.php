@@ -84,10 +84,16 @@ class AdminController extends AbstractController
      */
     public function listArticles(Request $request, ArticleRepository $repository, PaginatorInterface $paginator): Response
     {
+        if ($request->query->getAlnum('filter')) {
+            $queryBuilder
+                ->where('bp.title LIKE :title')
+                ->setParameter('title', '%' . $request->query->getAlnum('filter') . '%');
+        }
+
         $pagination = $paginator->paginate(
             $repository->queryAll(),
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 5)
+            Article::NUMBER_OF_ITEMS
         );
 
         return $this->render(
@@ -113,7 +119,7 @@ class AdminController extends AbstractController
     public function listNotAcceptedArticles(Request $request, ArticleRepository $repository, PaginatorInterface $paginator): Response
     {
         $pagination = $paginator->paginate(
-            $repository->findBy(['isAccepted' => false]),
+            $repository->queryNotAccepted(),
             $request->query->getInt('page', 1),
             Article::NUMBER_OF_ITEMS
         );

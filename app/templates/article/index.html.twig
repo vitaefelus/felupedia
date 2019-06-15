@@ -6,7 +6,12 @@
 
 {% block body %}
     <div class="container container-fix">
-            <h1>{{ 'title.article_list'|trans }}</h1>
+        <h1>{{ 'title.article_list'|trans }}</h1>
+        <form action="{{ path("article_index") }}" method="GET">
+            <label for="filter">{{ 'label.search'|trans }}</label>
+            <input name="filter" type="text">
+            <button class="btn btn-red" type="submit">{{ 'button.search'|trans }}</button>
+        </form>
     {% if pagination is defined and pagination|length %}
 
             <div class="navigation text-center">
@@ -18,23 +23,27 @@
                     <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 't.createdAt') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 't.updatedAt') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 't.title') }}</th>
+                    <th>{{ 'label.tags'|trans }}</th>
                     <th>{{ 'label.actions'|trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for article in pagination %}
-                    {% if article.getParagraphs()|length and article.isAccepted == '1'%}
                         <tr>
                             <td>{{ article.createdAt|localizeddate }}</td>
                             <td>{{ article.updatedAt|localizeddate }}</td>
                             <td>{{ article.title }}</td>
+                            <td>
+                                {% for tag in article.getTags() %}
+                                    {{ tag.name }},
+                                {% endfor %}
+                            </td>
                             <td>
                                 <a href="{{ url('article_view', {id: article.id}) }}" title="{{ 'action.view'|trans }}">
                                     {{ 'action.view'|trans }}
                                 </a>
                             </td>
                         </tr>
-                    {% endif %}
                 {% endfor %}
                 </tbody>
             </table>
@@ -42,12 +51,13 @@
             <div class="navigation text-center">
                 {{ knp_pagination_render(pagination) }}
             </div>
-    </div>
 
     {% else %}
         <p>
             {{ 'message.empty_list'|trans }}
         </p>
     {% endif %}
+    </div>
+
 
 {% endblock %}

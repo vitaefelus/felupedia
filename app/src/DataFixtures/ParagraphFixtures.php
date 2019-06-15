@@ -23,7 +23,7 @@ class ParagraphFixtures extends AbstractBaseFixtures implements DependentFixture
      */
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(20, 'paragraphs', function ($i) {
+        $this->createMany(30, 'paragraphs', function ($i) {
             $paragraph = new Paragraph();
             $paragraph->setSubheading($this->faker->text(200));
             $paragraph->setTextContent($this->faker->text(2000));

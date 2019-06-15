@@ -40,8 +40,14 @@ class ArticleController extends AbstractController
      */
     public function index(Request $request, ArticleRepository $repository, PaginatorInterface $paginator): Response
     {
+        $query = $repository->queryAccepted();
+
+        if ($request->query->getAlnum('filter')) {
+            $query = $repository->queryFilter($request);
+        }
+
         $pagination = $paginator->paginate(
-            $repository->queryAll(),
+            $query,
             $request->query->getInt('page', 1),
             Article::NUMBER_OF_ITEMS
         );
@@ -78,37 +84,6 @@ class ArticleController extends AbstractController
         return $this->render(
             'article/view.html.twig',
             ['article' => $article]
-        );
-    }
-
-    /**
-     * @param Request            $request
-     * @param ArticleRepository  $repository
-     * @param PaginatorInterface $paginator
-     * @param string             $title
-     *
-     * @return Response
-     *
-     * @Route(
-     *    "/filter/{title}",
-     *     requirements={"title":"[a-zA-Z]\d*"},
-     *     methods={"GET","POST"},
-     *     name="article_filter"
-     * )
-     */
-    public function filter(Request $request, ArticleRepository $repository, PaginatorInterface $paginator, $title): Response
-    {
-        //$titleToSearch = '/^.*'.$title.'.*$/';
-
-        $pagination = $paginator->paginate(
-            $repository->findBy(['title' => $title]),
-            $request->query->getInt('page', 1),
-            Article::NUMBER_OF_ITEMS
-        );
-
-        return $this->render(
-            'article/index.html.twig',
-            ['pagination' => $pagination]
         );
     }
 

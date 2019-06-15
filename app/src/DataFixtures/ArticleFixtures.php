@@ -23,7 +23,7 @@ class ArticleFixtures extends AbstractBaseFixtures implements DependentFixtureIn
      */
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(10, 'articles', function ($i) {
+        $this->createMany(25, 'articles', function ($i) {
             $article = new Article();
             $article->setTitle($this->faker->sentence(2));
             $article->setIsAccepted($this->faker->boolean);

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title.userProfile'|trans }}: {{ user.username }}
+{% endblock %}
+
+{% block body %}
+    <div class="container container-fix">
+        <h1 class="">{{ user.username }}</h1>
+        <hr>
+        {% if user is defined and user|length %}
+                <div class="row paragraph">
+                    <div class="col">
+                        <ul>
+                            <li>
+                                <strong>{{ 'profile.userTitleFirstNameAndSurname'|trans }}: </strong>{{ user.title }}, {{ user.firstName }} {{ user.lastName }}
+                            </li>
+                           {# <li>
+                                <strong>{{ 'profile.userRoles'|trans }}:</strong>{{ for role in roles }} <span class="user-type">{{ role }}</span> {{ endfor }}
+                            </li> #}
+                            <li>
+                                <strong>{{ 'profile.joined'|trans }}: </strong>{{ user.createdAt|localizeddate }}
+                            </li>
+                        </ul>
+                        {# if user.username is loggedUser.username #}
+                            <a class="btn btn-red" href="{{ '/profile/' ~ user.id ~ '/change-password' }}">{{ 'button.changePassword'|trans }}</a>
+                            <a class="btn btn-red" href="{{ '/profile/' ~ user.id ~ '/change-profile' }}">{{ 'button.changeProfile'|trans }}</a>
+                        {# endif #}
+                    </div>
+                </div>
+            <hr>
+        {% else %}
+            <p>
+                {{ 'message.item_not_found'|trans }}
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}

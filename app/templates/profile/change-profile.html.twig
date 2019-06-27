@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title.change_profile'|trans }} {{ user.username }}
+{% endblock %}
+
+{% block body %}
+    <div class="container container-fix">
+        <h1>{{ 'title.change_profile'|trans({'%id%': user.id|default('')}) }}</h1>
+        {{ form_start(form, { method: 'PUT', action: url('profile_change', {id: user.id}) }) }}
+        {{ form_widget(form) }}
+        <div class="form-group row float-sm-right">
+            <input type="submit" value="{{ 'button.save'|trans }}" class="btn btn-primary" />
+        </div>
+        <div class="form-group row float-sm-left">
+            <a href="{{ url('home') }}" class="btn btn-link">
+                {{ 'button.back'|trans }}
+            </a>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

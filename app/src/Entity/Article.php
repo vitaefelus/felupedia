@@ -52,21 +52,13 @@ class Article
      *     inversedBy="articles",
      *     orphanRemoval=true
      * )
-     *
-     * @Assert\Count(
-     *     min=1,
-     *     minMessage = "error.too_little_tags"
-     * )
      */
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Paragraph", mappedBy="article")
+     * Paragraphs.
      *
-     * @Assert\Count(
-     *     min=1,
-     *     minMessage = "error.too_little_paragraphs"
-     * )
+     * @ORM\OneToMany(targetEntity="App\Entity\Paragraph", mappedBy="article")
      */
     private $paragraphs;
 
@@ -122,6 +114,17 @@ class Article
      * @Gedmo\Slug(fields={"title"})
      */
     private $code;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVisible;
 
     /**
      * Article constructor.
@@ -321,6 +324,46 @@ class Article
     public function setCode(string $code): self
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User|null $author
+     *
+     * @return Article
+     */
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsVisible(): ?bool
+    {
+        return $this->isVisible;
+    }
+
+    /**
+     * @param bool $isVisible
+     *
+     * @return Article
+     */
+    public function setIsVisible(bool $isVisible): self
+    {
+        $this->isVisible = $isVisible;
 
         return $this;
     }

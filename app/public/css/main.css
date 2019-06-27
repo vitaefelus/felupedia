@@ -76,6 +76,12 @@ figure figcaption {
 .navbar a:hover {
   color: #db5461;
 }
+.navbar .nav-annotation {
+  color: #fafafa;
+}
+.navbar .nav-user {
+  font-weight: bold;
+}
 .footer-wrapper {
   display: flex;
   justify-content: center;

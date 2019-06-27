@@ -5,18 +5,16 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
-use App\Entity\Comment;
 use App\Entity\User;
-use App\Repository\ArticleRepository;
-use App\Form\CommentType;
-use App\Repository\CommentRepository;
-use Knp\Component\Pager\PaginatorInterface;
+use App\Form\ChangePasswordType;
+use App\Form\ChangeProfileType;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class ArticleController.
@@ -58,4 +56,86 @@ class ProfileController extends AbstractController
         );
     }
 
+    /**
+     * @param Request                      $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param UserRepository               $repository
+     * @param User id                      $id
+     *
+     * @Route(
+     *     "/{id}/change-password",
+     *     name="profile_change_password",
+     *     requirements={"id": "[1-9]\d*"},
+     * )
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function changePassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, UserRepository $repository, $id): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(ChangePasswordType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $user->getNewPassword()
+                )
+            );
+            try {
+                $repository->save($user);
+            } catch (\Exception $e) {
+                error_log($e->getMessage());
+            }
+            $this->addFlash('success', 'message.updated_successfully');
+
+            return $this->redirectToRoute('profile_view', ['id' => $user->getId()]);
+        }
+
+        return $this->render('profile/change-password.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * changeProfile action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
+     * @param User                                      $user
+     * @param UserRepository                            $repository Category repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/{id}/change-profile",
+     *     methods={"GET", "PUT"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="profile_change",
+     * )
+     */
+    public function changeProfile(Request $request, User $user, UserRepository $repository): Response
+    {
+        $form = $this->createForm(ChangeProfileType::class, $user, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setUpdatedAt(new \DateTime());
+            $repository->save($user);
+
+            $this->addFlash('success', 'message.updated_successfully');
+
+            return $this->redirectToRoute('profile_view', ['id' => $user->getId()]);
+        }
+
+        return $this->render(
+            'profile/change-profile.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user,
+            ]
+        );
+    }
 }

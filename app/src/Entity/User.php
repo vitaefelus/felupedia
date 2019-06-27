@@ -5,6 +5,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -115,13 +117,17 @@ class User implements UserInterface
      *
      * @ORM\Column(type="string", length=64)
      *
-     * @Assert\NotBlank(groups={"register"})
+     * @Assert\NotBlank(groups={"register", "change_password"})
      * @Assert\Length(
      *     min="3",
      *     max="255",
-     * )(groups={"register"})
+     *     groups={"register", "change_password"}
+     * )
      *
-     * @SecurityAssert\UserPassword
+     * @SecurityAssert\UserPassword(
+     *     message = "error.wrong_current_password",
+     *     groups={"change_password"}
+     * )
      */
     private $password;
 
@@ -141,7 +147,8 @@ class User implements UserInterface
      * @Assert\Length(
      *     min="3",
      *     max="255",
-     * )(groups={"register"})
+     *     groups={"register"}
+     * )
      */
     private $firstName;
 
@@ -154,7 +161,8 @@ class User implements UserInterface
      * @Assert\Length(
      *     min="0",
      *     max="64",
-     * )(groups={"register"})
+     *     groups={"register"}
+     * )
      */
     private $title;
 
@@ -167,7 +175,8 @@ class User implements UserInterface
      * @Assert\Length(
      *     min="0",
      *     max="255",
-     * )(groups={"register"})
+     *     groups={"register"}
+     * )
      */
     private $lastName;
 
@@ -182,6 +191,25 @@ class User implements UserInterface
      * @Assert\NotBlank(groups={"register"})
      */
     private $username;
+
+    /**
+     * @Assert\Length(
+     *     min = 3,
+     *     minMessage = "error.password_too_short",
+     *     groups = {"change_password"}
+     * )
+     */
+    protected $newPassword;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author")
+     */
+    private $articles;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
 
     /**
      * @return int|null
@@ -412,6 +440,55 @@ class User implements UserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+    /**
+     * Getter for the newPassword.
+     *
+     * @return string|null newPassword
+     */
+    public function getNewPassword(): ?string
+    {
+        return $this->newPassword;
+    }
+    /**
+     * Setter for the newPassword.
+     *
+     * @param string $newPassword newPassword
+     */
+    public function setNewPassword(string $newPassword): void
+    {
+        $this->newPassword = $newPassword;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getAuthor() === $this) {
+                $article->setAuthor(null);
+            }
+        }
 
         return $this;
     }

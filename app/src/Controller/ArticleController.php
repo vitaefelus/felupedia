@@ -7,9 +7,16 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Comment;
+use App\Entity\Paragraph;
+use App\Form\AddArticleType;
+use App\Form\ParagraphType;
 use App\Repository\ArticleRepository;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
+use App\Repository\ParagraphRepository;
+use DateTime;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,17 +95,105 @@ class ArticleController extends AbstractController
     }
 
     /**
+     * New Article action.
+     *
+     * @param Request           $request    HTTP request
+     * @param ArticleRepository $repository Article repository
+     *
+     * @return Response HTTP response
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     *
+     * @Route(
+     *     "/new",
+     *     methods={"GET", "POST"},
+     *     name="article_new",
+     * )
+     */
+    public function new(Request $request, ArticleRepository $repository): Response
+    {
+        $article = new Article();
+
+        $form = $this->createForm(AddArticleType::class, $article);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $article->setCreatedAt(new DateTime());
+            $article->setUpdatedAt(new DateTime());
+            $article->setIsAccepted(false);
+            $article->setIsVisible(false);
+            $article->setAuthor($this->getUser());
+            $repository->save($article);
+
+            return $this->redirectToRoute('article_view', ['id' => $article->getId()]);
+        }
+
+        return $this->render(
+            'article/new.html.twig',
+            [
+                'form' => $form->createView(),
+                'article' => $article,
+            ]
+        );
+    }
+
+    /**
+     * Add Paragraph action.
+     *
+     * @param Request             $request             HTTP request
+     * @param ParagraphRepository $paragraphRepository
+     * @param ArticleRepository   $articleRepository
+     * @param $id
+     *
+     * @return Response HTTP response
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     *
+     * @Route(
+     *     "/{id}/add-paragraph",
+     *     requirements={"id": "[1-9]\d*"},
+     *     methods={"GET", "POST"},
+     *     name="article_add_paragraph",
+     * )
+     */
+    public function addParagraph(Request $request, ParagraphRepository $paragraphRepository, ArticleRepository $articleRepository, $id): Response
+    {
+        $paragraph = new Paragraph();
+        $article = $articleRepository->find($id);
+
+        $form = $this->createForm(ParagraphType::class, $paragraph);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $paragraph->setArticle($article);
+            $paragraphRepository->save($paragraph);
+
+            return $this->redirectToRoute('article_view', ['id' => $article->getId()]);
+        }
+
+        return $this->render(
+            'article/add-paragraph.html.twig',
+            [
+                'form' => $form->createView(),
+                'article' => $article,
+            ]
+        );
+    }
+
+    /**
      * Add comment action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
-     * @param \App\Repository\CommentRepository         $commentRepository Comment repository
-     * @param ArticleRepository                         $articleRepository Article repository
-     * @param id                                        $id                Id of article element
+     * @param Request           $request           HTTP request
+     * @param CommentRepository $commentRepository Comment repository
+     * @param ArticleRepository $articleRepository Article repository
+     * @param id                $id                Id of article element
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{id}/add-comment",
@@ -117,8 +212,8 @@ class ArticleController extends AbstractController
         $article = $articleRepository->find($id);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setCreatedAt(new \DateTime());
-            $comment->setUpdatedAt(new \DateTime());
+            $comment->setCreatedAt(new DateTime());
+            $comment->setUpdatedAt(new DateTime());
             $comment->setIsVisible(true);
             $comment->setArticle($article);
             $comment->setAuthor($this->getUser());

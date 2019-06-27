@@ -2,8 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Comment;
 use App\Entity\Paragraph;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -14,9 +17,28 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ParagraphRepository extends ServiceEntityRepository
 {
+    /**
+     * ParagraphRepository constructor.
+     *
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Paragraph::class);
+    }
+
+    /**
+     * Save record.
+     *
+     * @param Paragraph $paragraph
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function save(Paragraph $paragraph): void
+    {
+        $this->_em->persist($paragraph);
+        $this->_em->flush($paragraph);
     }
 
     // /**

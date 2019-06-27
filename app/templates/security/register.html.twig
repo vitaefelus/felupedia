@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.login'|trans }}
+    {{ 'title.register'|trans }}
 {% endblock title %}
 
 {% block body %}
     <div class="container container-fix">
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn btn-red" type="submit">Register!</button>
+    <button class="btn btn-red" type="submit">{{ 'button.register'|trans }}</button>
     {{ form_end(form) }}
     </div>
 {% endblock body %}

@@ -27,6 +27,8 @@ class ArticleFixtures extends AbstractBaseFixtures implements DependentFixtureIn
             $article = new Article();
             $article->setTitle($this->faker->sentence(2));
             $article->setIsAccepted($this->faker->boolean);
+            $article->setIsVisible(true);
+            $article->setAuthor($this->getRandomReference('admins'));
 
             $tags = $this->getRandomReferences(
                 'tags',

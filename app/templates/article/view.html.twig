@@ -8,7 +8,7 @@
     <div class="container container-article container-fix">
         <h1 class="article">{{ article.title }}</h1>
         <hr>
-        {% if article is defined and article|length and article.getParagraphs()|length %}
+        {% if article is defined and article|length %}
             {% for paragraph in article.getParagraphs() %}
                 <div class="row paragraph">
                     {% if not paragraph.subheading is empty %}
@@ -17,7 +17,7 @@
                     <div class="col">
                         <p class="float-left">{{ paragraph.textContent }}</p>
                     </div>
-                    {% if not paragraph.getPicture().src is empty %}
+                    {% if not paragraph.getPicture() is empty %}
                         <figure class="figure float-right align-self-center">
                             <img class="figure-img img-fluid" src="{{ asset('images/article/' ~ paragraph.getPicture().src) }}" alt="{{ article.title }}"/>
                             <figcaption class="figure-caption text-center">{{ paragraph.getPicture().description }}</figcaption>
@@ -25,6 +25,7 @@
                     {% endif %}
                 </div>
             {% endfor %}
+            <a class="btn btn-red" href="{{ path('article_add_paragraph', { 'id': article.id }) }}">{{ 'button.add_paragraph' }}</a>
             <hr>
         {% else %}
             <p>

@@ -17,7 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * Class ArticleController.
+ * Class ProfileController.
  *
  * @Route("/profile")
  */
@@ -57,6 +57,8 @@ class ProfileController extends AbstractController
     }
 
     /**
+     * Change password action.
+     *
      * @param Request                      $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param UserRepository               $repository
@@ -108,11 +110,11 @@ class ProfileController extends AbstractController
     /**
      * changeProfile action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param User                                      $user
-     * @param UserRepository                            $repository Category repository
+     * @param Request        $request    HTTP request
+     * @param User           $user
+     * @param UserRepository $repository Category repository
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException

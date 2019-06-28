@@ -195,7 +195,7 @@ class User implements UserInterface
     /**
      * @Assert\Length(
      *     min = 3,
-     *     minMessage = "error.password_too_short",
+     *     minMessage = "{{ 'error.password_too_short'|trans }}",
      *     groups = {"change_password"}
      * )
      */
@@ -206,6 +206,9 @@ class User implements UserInterface
      */
     private $articles;
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -470,6 +473,11 @@ class User implements UserInterface
         return $this->articles;
     }
 
+    /**
+     * @param Article $article
+     *
+     * @return User
+     */
     public function addArticle(Article $article): self
     {
         if (!$this->articles->contains($article)) {
@@ -480,6 +488,11 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Article $article
+     *
+     * @return User
+     */
     public function removeArticle(Article $article): self
     {
         if ($this->articles->contains($article)) {

@@ -6,7 +6,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -24,11 +23,20 @@ class Paragraph
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert/NotBlank
+     *
+     * @Assert/Length(
+     *      max = 255,
+     *      maxMessage = "{{ 'error.too_short'|trans }}"
+     * )
      */
     private $subheading;
 
     /**
      * @ORM\Column(type="text")
+     *
+     * @Assert/NotBlank
      */
     private $textContent;
 

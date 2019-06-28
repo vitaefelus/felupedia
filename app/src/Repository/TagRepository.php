@@ -1,4 +1,7 @@
 <?php
+/**
+ * Tag repository.
+ */
 
 namespace App\Repository;
 
@@ -6,7 +9,6 @@ use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -47,18 +49,6 @@ class TagRepository extends ServiceEntityRepository
     {
         $this->_em->persist($tag);
         $this->_em->flush($tag);
-    }
-
-    /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?: $this->createQueryBuilder('t');
     }
 
     // /**

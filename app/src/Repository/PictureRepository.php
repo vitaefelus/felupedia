@@ -1,4 +1,7 @@
 <?php
+/**
+ * Picture repository.
+ */
 
 namespace App\Repository;
 
@@ -14,6 +17,11 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class PictureRepository extends ServiceEntityRepository
 {
+    /**
+     * PictureRepository constructor.
+     *
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Picture::class);

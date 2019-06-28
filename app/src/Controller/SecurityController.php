@@ -66,6 +66,8 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * Register action.
+     *
      * @param Request                      $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param UserRepository               $repository
@@ -74,6 +76,7 @@ class SecurityController extends AbstractController
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     *
      * @Route(
      *     "/register",
      *     methods={"GET", "POST"},

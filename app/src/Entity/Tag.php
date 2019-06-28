@@ -21,6 +21,13 @@ class Tag
 
     /**
      * @ORM\Column(type="string", length=64)
+     *
+     * @Assert/NotBlank
+     *
+     * @Assert/Length(
+     *      max = 64,
+     *      maxMessage = {{ 'error.too_long'|trans }}
+     * )
      */
     private $name;
 

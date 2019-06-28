@@ -28,7 +28,7 @@ class Comment
      * @Assert\NotBlank
      * @Assert\Length(
      *     max=1000,
-     *     maxMessage = "error.too_long_comment"
+     *     maxMessage = "{{ 'error.too_long_comment'|trans }}"
      * )
      */
     private $content;

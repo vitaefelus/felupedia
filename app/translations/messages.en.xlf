@@ -230,6 +230,34 @@
                 <source>action.login</source>
                 <target>Log in</target>
             </trans-unit>
+            <trans-unit id="title.paragraph_delete">
+                <source>title.paragraph_delete</source>
+                <target>Delete</target>
+            </trans-unit>
+            <trans-unit id="action.edit">
+                <source>action.edit</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="label.roles">
+                <source>label.roles</source>
+                <target>Roles</target>
+            </trans-unit>
+            <trans-unit id="label.grant_privileges">
+                <source>label.grant_privileges</source>
+                <target>Grant privileges</target>
+            </trans-unit>
+            <trans-unit id="label.toggle_status">
+                <source>label.toggle_status</source>
+                <target>Toggle status</target>
+            </trans-unit>
+            <trans-unit id="title.user_grant">
+                <source>title.user_grant</source>
+                <target>Grant privileges</target>
+            </trans-unit>
+            <trans-unit id="title.user_toggle">
+                <source>title.user_toggle</source>
+                <target>Toggle status</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

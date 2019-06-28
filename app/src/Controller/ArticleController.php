@@ -192,9 +192,9 @@ class ArticleController extends AbstractController
     /**
      * Edit Paragraph action.
      *
-     * @param Request $request    HTTP request
-     * @param Paragraph                                 $paragraph
-     * @param ParagraphRepository                       $repository Paragraph repository
+     * @param Request             $request    HTTP request
+     * @param Paragraph           $paragraph  Paragraph entity
+     * @param ParagraphRepository $repository Paragraph repository
      *
      * @return Response HTTP response
      *

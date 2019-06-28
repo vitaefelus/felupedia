@@ -34,6 +34,12 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     max = 255,
+     *     maxMessage = "{{ 'error.too_long'|trans }}",
+     * )
      */
     private $title;
 
@@ -53,6 +59,10 @@ class Article
      *     orphanRemoval=true
      * )
      * @ORM\JoinTable(name="article_tag")
+     *
+     * @Assert\Count(
+     *     min = 1
+     * )
      */
     private $tags;
 
@@ -137,6 +147,8 @@ class Article
     }
 
     /**
+     * Getter for id.
+     *
      * @return int|null
      */
     public function getId(): ?int
@@ -145,6 +157,8 @@ class Article
     }
 
     /**
+     * Getter for title.
+     *
      * @return string|null
      */
     public function getTitle(): ?string
@@ -153,6 +167,8 @@ class Article
     }
 
     /**
+     * Setter for title.
+     *
      * @param string $title
      *
      * @return Article
@@ -165,6 +181,8 @@ class Article
     }
 
     /**
+     * Getter for isAccepted.
+     *
      * @return bool|null
      */
     public function getIsAccepted(): ?bool
@@ -173,6 +191,8 @@ class Article
     }
 
     /**
+     * Setter for isAccepted.
+     *
      * @param bool $isAccepted
      *
      * @return Article
@@ -185,6 +205,8 @@ class Article
     }
 
     /**
+     * Getter for tags.
+     *
      * @return Collection|Tag[]
      */
     public function getTags(): Collection
@@ -193,6 +215,8 @@ class Article
     }
 
     /**
+     * Getter for comments.
+     *
      * @return Collection|null
      */
     public function getComments(): Collection
@@ -201,6 +225,8 @@ class Article
     }
 
     /**
+     * Add Tag.
+     *
      * @param Tag $tag
      *
      * @return Article
@@ -215,6 +241,8 @@ class Article
     }
 
     /**
+     * Remove tag.
+     *
      * @param Tag $tag
      *
      * @return Article
@@ -229,6 +257,8 @@ class Article
     }
 
     /**
+     * Getter for Paragraphs.
+     *
      * @return Collection|Paragraph[]
      */
     public function getParagraphs(): Collection
@@ -237,6 +267,8 @@ class Article
     }
 
     /**
+     * Add Paragraph.
+     *
      * @param Paragraph $paragraph
      *
      * @return Article
@@ -252,6 +284,8 @@ class Article
     }
 
     /**
+     * Remove Paragraph.
+     *
      * @param Paragraph $paragraph
      *
      * @return Article
@@ -270,6 +304,8 @@ class Article
     }
 
     /**
+     * Getter for createdAt.
+     *
      * @return \DateTimeInterface|null
      */
     public function getCreatedAt(): ?\DateTimeInterface
@@ -278,6 +314,8 @@ class Article
     }
 
     /**
+     * Setter for createdAt.
+     *
      * @param \DateTimeInterface $createdAt
      *
      * @return Article
@@ -290,6 +328,8 @@ class Article
     }
 
     /**
+     * Getter for updatedAt.
+     *
      * @return \DateTimeInterface|null
      */
     public function getUpdatedAt(): ?\DateTimeInterface
@@ -298,6 +338,8 @@ class Article
     }
 
     /**
+     * Setter for updatedAt.
+     *
      * @param \DateTimeInterface $updatedAt
      *
      * @return Article
@@ -310,6 +352,8 @@ class Article
     }
 
     /**
+     * Getter for code.
+     *
      * @return string|null
      */
     public function getCode(): ?string
@@ -318,6 +362,8 @@ class Article
     }
 
     /**
+     * Setter for code.
+     *
      * @param string $code
      *
      * @return Article
@@ -330,6 +376,8 @@ class Article
     }
 
     /**
+     * Getter for author.
+     *
      * @return User|null
      */
     public function getAuthor(): ?User
@@ -338,6 +386,8 @@ class Article
     }
 
     /**
+     * Setter for author.
+     *
      * @param User|null $author
      *
      * @return Article
@@ -350,6 +400,8 @@ class Article
     }
 
     /**
+     * Getter for isVisible.
+     *
      * @return bool|null
      */
     public function getIsVisible(): ?bool
@@ -358,6 +410,8 @@ class Article
     }
 
     /**
+     * Setter for isVisible.
+     *
      * @param bool $isVisible
      *
      * @return Article

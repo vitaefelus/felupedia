@@ -157,7 +157,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * listArticles action.
+     * List articles action.
      *
      * @param Request            $request    HTTP request
      * @param ArticleRepository  $repository Repository

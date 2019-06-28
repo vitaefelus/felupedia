@@ -90,6 +90,146 @@
                 <source>label.is_accepted</source>
                 <target>Status</target>
             </trans-unit>
+            <trans-unit id="title.changePassword">
+                <source>title.changePassword</source>
+                <target>Zmień hasło</target>
+            </trans-unit>
+            <trans-unit id="button.changePassword">
+                <source>button.changePassword</source>
+                <target>Zmień hasło</target>
+            </trans-unit>
+            <trans-unit id="title.change_profile">
+                <source>title.change_profile</source>
+                <target>Zmień dane profilu</target>
+            </trans-unit>
+            <trans-unit id="button.save">
+                <source>button.save</source>
+                <target>Zapisz</target>
+            </trans-unit>
+            <trans-unit id="button.back">
+                <source>button.back</source>
+                <target>Wróć</target>
+            </trans-unit>
+            <trans-unit id="title.userProfile">
+                <source>title.userProfile</source>
+                <target>Profil użytkownika</target>
+            </trans-unit>
+            <trans-unit id="profile.userTitleFirstNameAndSurname">
+                <source>profile.userTitleFirstNameAndSurname</source>
+                <target>Tytuł, imię, nazwisko</target>
+            </trans-unit>
+            <trans-unit id="profile.userRoles">
+                <source>profile.userRoles</source>
+                <target>Role</target>
+            </trans-unit>
+            <trans-unit id="profile.joined">
+                <source>profile.joined</source>
+                <target>Dołączono</target>
+            </trans-unit>
+            <trans-unit id="button.changeProfile">
+                <source>button.changeProfile</source>
+                <target>Zmień dane profilu</target>
+            </trans-unit>
+            <trans-unit id="navbar.articles">
+                <source>navbar.articles</source>
+                <target>Artykuły</target>
+            </trans-unit>
+            <trans-unit id="navbar.admin">
+                <source>navbar.admin</source>
+                <target>Panel administratora</target>
+            </trans-unit>
+            <trans-unit id="navbar.new_article">
+                <source>navbar.new_article</source>
+                <target>Nowy artykuł</target>
+            </trans-unit>
+            <trans-unit id="navbar.logged_as">
+                <source>navbar.logged_as</source>
+                <target>Zalogowano jako</target>
+            </trans-unit>
+            <trans-unit id="button.logout">
+                <source>button.logout</source>
+                <target>Wyloguj się</target>
+            </trans-unit>
+            <trans-unit id="button.login">
+                <source>button.login</source>
+                <target>Zaloguj się</target>
+            </trans-unit>
+            <trans-unit id="button.register">
+                <source>button.register</source>
+                <target>Zarejestruj się</target>
+            </trans-unit>
+            <trans-unit id="title.welcome">
+                <source>title.welcome</source>
+                <target>Witaj</target>
+            </trans-unit>
+            <trans-unit id="title.homepage">
+                <source>title.homepage</source>
+                <target>Strona główna</target>
+            </trans-unit>
+            <trans-unit id="label.search">
+                <source>label.search</source>
+                <target>Szukaj</target>
+            </trans-unit>
+            <trans-unit id="title.paragraph_new">
+                <source>title.paragraph_new</source>
+                <target>Nowy akapit</target>
+            </trans-unit>
+            <trans-unit id="action.save">
+                <source>action.save</source>
+                <target>Zapisz</target>
+            </trans-unit>
+            <trans-unit id="title.comment_new">
+                <source>title.comment_new</source>
+                <target>Nowy komentarz</target>
+            </trans-unit>
+            <trans-unit id="action.back_to_list">
+                <source>action.back_to_list</source>
+                <target>Wróć do listy</target>
+            </trans-unit>
+            <trans-unit id="label.tags">
+                <source>label.tags</source>
+                <target>Tagi</target>
+            </trans-unit>
+            <trans-unit id="heading.comments">
+                <source>heading.comments</source>
+                <target>Komentarze</target>
+            </trans-unit>
+            <trans-unit id="button.add_comment">
+                <source>button.add_comment</source>
+                <target>Dodaj komentarz</target>
+            </trans-unit>
+            <trans-unit id="title.article_new">
+                <source>title.article_new</source>
+                <target>Nowy artykuł</target>
+            </trans-unit>
+            <trans-unit id="title.article_accept">
+                <source>title.article_accept</source>
+                <target>Zaakceptuj artykuł</target>
+            </trans-unit>
+            <trans-unit id="label.accept">
+                <source>label.accept</source>
+                <target>Potwierdź</target>
+            </trans-unit>
+            <trans-unit id="action.accept">
+                <source>action.accept</source>
+                <target>Potwierdź</target>
+            </trans-unit>
+            <trans-unit id="title.register">
+                <source>title.register</source>
+                <target>Rejestracja</target>
+            </trans-unit>
+            <trans-unit id="title.login">
+                <source>title.login</source>
+                <target>Logowanie</target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Hasło</target>
+            </trans-unit>
+            <trans-unit id="action.login">
+                <source>action.login</source>
+                <target>Zaloguj</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

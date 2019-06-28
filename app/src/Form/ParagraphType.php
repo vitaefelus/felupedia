@@ -36,7 +36,7 @@ class ParagraphType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'label.heading',
-                    'required' => true,
+                    'required' => false,
                     'attr' => ['max_length' => 255],
                 ]
             )
@@ -45,7 +45,7 @@ class ParagraphType extends AbstractType
                 TextareaType::class,
                 [
                     'label' => 'label.text_content',
-                    'required' => false,
+                    'required' => true,
                 ]
             );
     }

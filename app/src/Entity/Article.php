@@ -52,6 +52,7 @@ class Article
      *     inversedBy="articles",
      *     orphanRemoval=true
      * )
+     * @ORM\JoinTable(name="article_tag")
      */
     private $tags;
 

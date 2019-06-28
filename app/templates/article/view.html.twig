@@ -7,13 +7,17 @@
 {% block body %}
     <div class="container container-article container-fix">
         <h1 class="article">{{ article.title }}</h1>
+        <span class="author">{{ article.getAuthor().username }}</span>
         <hr>
         {% if article is defined and article|length %}
             {% for paragraph in article.getParagraphs() %}
                 <div class="row paragraph">
-                    {% if not paragraph.subheading is empty %}
-                        <h5>{{ paragraph.subheading }}</h5>
+                    <h5>{{ paragraph.subheading }}
+                    {% if app.user and app.user == article.getAuthor() %}
+                        <a class="paragraph-action" href="{{ path('article_edit_paragraph', { 'id': article.id, 'paragraph': paragraph.id }) }}">{{ 'action.edit'|trans }}</a>
+                        <a class="paragraph-action" href="{{ path('article_delete_paragraph', { 'id': article.id, 'paragraph': paragraph.id }) }}">{{ 'action.delete'|trans }}</a>
                     {% endif %}
+                    </h5></h5>
                     <div class="col">
                         <p class="float-left">{{ paragraph.textContent }}</p>
                     </div>
@@ -25,7 +29,9 @@
                     {% endif %}
                 </div>
             {% endfor %}
-            <a class="btn btn-red" href="{{ path('article_add_paragraph', { 'id': article.id }) }}">{{ 'button.add_paragraph' }}</a>
+            {% if app.user and app.user == article.getAuthor() %}
+                <a class="btn btn-red" href="{{ path('article_add_paragraph', { 'id': article.id }) }}">{{ 'button.add_paragraph' }}</a>
+            {% endif %}
             <hr>
         {% else %}
             <p>

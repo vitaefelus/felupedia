@@ -1,8 +1,10 @@
 <?php
+/**
+ * Paragraph repository.
+ */
 
 namespace App\Repository;
 
-use App\Entity\Comment;
 use App\Entity\Paragraph;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -38,6 +40,20 @@ class ParagraphRepository extends ServiceEntityRepository
     public function save(Paragraph $paragraph): void
     {
         $this->_em->persist($paragraph);
+        $this->_em->flush($paragraph);
+    }
+
+    /**
+     * Delete record.
+     *
+     * @param Paragraph $paragraph
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function delete(Paragraph $paragraph): void
+    {
+        $this->_em->remove($paragraph);
         $this->_em->flush($paragraph);
     }
 

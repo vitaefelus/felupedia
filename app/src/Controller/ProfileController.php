@@ -72,6 +72,14 @@ class ProfileController extends AbstractController
     public function changePassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, UserRepository $repository, $id): Response
     {
         $user = $this->getUser();
+        $userProfile = $repository->find($id);
+
+        if ($userProfile !== $this->getUser()) {
+            $this->addFlash('warning', 'message.forbidden');
+
+            return $this->redirectToRoute('profile_view', ['id' => $user->getId()]);
+        }
+
         $form = $this->createForm(ChangePasswordType::class, $user);
         $form->handleRequest($request);
 
@@ -118,6 +126,11 @@ class ProfileController extends AbstractController
      */
     public function changeProfile(Request $request, User $user, UserRepository $repository): Response
     {
+        if ($user !== $this->getUser()) {
+            $this->addFlash('warning', 'message.forbidden');
+
+            return $this->redirectToRoute('profile_view', ['id' => $user->getId()]);
+        }
         $form = $this->createForm(ChangeProfileType::class, $user, ['method' => 'PUT']);
         $form->handleRequest($request);
 

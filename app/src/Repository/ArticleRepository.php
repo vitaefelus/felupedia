@@ -64,17 +64,12 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $term
+     * @param Request $request
      *
      * @return QueryBuilder
      */
     public function queryFilter(Request $request): QueryBuilder
     {
-        // return $this->getOrCreateQueryBuilder()
-        //    ->where('t.getTags() LIKE :searchPhrase OR t.getTitle() LIKE :searchPhrase')
-        //  ->setParameter('searchPhrase', '%'.$term.'%')
-        //->orderBy('t.title', 'ASC');
-
         return $this->getOrCreateQueryBuilder()
             ->where('t.title LIKE :searchPhrase')
             ->setParameter('searchPhrase', '%'.$request->query->getAlnum('filter').'%')

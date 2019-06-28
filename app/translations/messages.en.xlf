@@ -90,6 +90,146 @@
                 <source>label.is_accepted</source>
                 <target>Is accepted</target>
             </trans-unit>
+            <trans-unit id="title.changePassword">
+                <source>title.changePassword</source>
+                <target>Change password</target>
+            </trans-unit>
+            <trans-unit id="button.changePassword">
+                <source>button.changePassword</source>
+                <target>Change password</target>
+            </trans-unit>
+            <trans-unit id="title.change_profile">
+                <source>title.change_profile</source>
+                <target>Change profile</target>
+            </trans-unit>
+            <trans-unit id="button.save">
+                <source>button.save</source>
+                <target>Save</target>
+            </trans-unit>
+            <trans-unit id="button.back">
+                <source>button.back</source>
+                <target>Back</target>
+            </trans-unit>
+            <trans-unit id="title.userProfile">
+                <source>title.userProfile</source>
+                <target>User profile</target>
+            </trans-unit>
+            <trans-unit id="profile.userTitleFirstNameAndSurname">
+                <source>profile.userTitleFirstNameAndSurname</source>
+                <target>Title, name, surname</target>
+            </trans-unit>
+            <trans-unit id="profile.userRoles">
+                <source>profile.userRoles</source>
+                <target>Roles</target>
+            </trans-unit>
+            <trans-unit id="profile.joined">
+                <source>profile.joined</source>
+                <target>Joined</target>
+            </trans-unit>
+            <trans-unit id="button.changeProfile">
+                <source>button.changeProfile</source>
+                <target>Change profile</target>
+            </trans-unit>
+            <trans-unit id="navbar.articles">
+                <source>navbar.articles</source>
+                <target>Articles</target>
+            </trans-unit>
+            <trans-unit id="navbar.admin">
+                <source>navbar.admin</source>
+                <target>Admin panel</target>
+            </trans-unit>
+            <trans-unit id="navbar.new_article">
+                <source>navbar.new_article</source>
+                <target>New article</target>
+            </trans-unit>
+            <trans-unit id="navbar.logged_as">
+                <source>navbar.logged_as</source>
+                <target>Logged as</target>
+            </trans-unit>
+            <trans-unit id="button.logout">
+                <source>button.logout</source>
+                <target>Log out</target>
+            </trans-unit>
+            <trans-unit id="button.login">
+                <source>button.login</source>
+                <target>Log in</target>
+            </trans-unit>
+            <trans-unit id="button.register">
+                <source>button.register</source>
+                <target>Register</target>
+            </trans-unit>
+            <trans-unit id="title.welcome">
+                <source>title.welcome</source>
+                <target>Welcome</target>
+            </trans-unit>
+            <trans-unit id="title.homepage">
+                <source>title.homepage</source>
+                <target>Homepage</target>
+            </trans-unit>
+            <trans-unit id="label.search">
+                <source>label.search</source>
+                <target>Search</target>
+            </trans-unit>
+            <trans-unit id="title.paragraph_new">
+                <source>title.paragraph_new</source>
+                <target>New paragraph</target>
+            </trans-unit>
+            <trans-unit id="action.save">
+                <source>action.save</source>
+                <target>Save</target>
+            </trans-unit>
+            <trans-unit id="title.comment_new">
+                <source>title.comment_new</source>
+                <target>New comment</target>
+            </trans-unit>
+            <trans-unit id="action.back_to_list">
+                <source>action.back_to_list</source>
+                <target>Back to list</target>
+            </trans-unit>
+            <trans-unit id="label.tags">
+                <source>label.tags</source>
+                <target>Tags</target>
+            </trans-unit>
+            <trans-unit id="heading.comments">
+                <source>heading.comments</source>
+                <target>Comments</target>
+            </trans-unit>
+            <trans-unit id="button.add_comment">
+                <source>button.add_comment</source>
+                <target>Add comment</target>
+            </trans-unit>
+            <trans-unit id="title.article_new">
+                <source>title.article_new</source>
+                <target>New article</target>
+            </trans-unit>
+            <trans-unit id="title.article_accept">
+                <source>title.article_accept</source>
+                <target>Accept article</target>
+            </trans-unit>
+            <trans-unit id="label.accept">
+                <source>label.accept</source>
+                <target>Accept</target>
+            </trans-unit>
+            <trans-unit id="action.accept">
+                <source>action.accept</source>
+                <target>Accept</target>
+            </trans-unit>
+            <trans-unit id="title.register">
+                <source>title.register</source>
+                <target>Register</target>
+            </trans-unit>
+            <trans-unit id="title.login">
+                <source>title.login</source>
+                <target>Login</target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="action.login">
+                <source>action.login</source>
+                <target>Log in</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -27,7 +27,7 @@
                                 <strong>{{ 'profile.joined'|trans }}: </strong>{{ user.createdAt|localizeddate }}
                             </li>
                         </ul>
-                        {% if app.user %}
+                        {% if app.user and app.user == user %}
                             <a class="btn btn-red" href="{{ path('profile_change_password', {id: user.id}) }}">{{ 'button.changePassword'|trans }}</a>
                             <a class="btn btn-red" href="{{ path('profile_change', {id: user.id}) }}">{{ 'button.changeProfile'|trans }}</a>
                         {% endif %}

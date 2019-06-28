@@ -64,7 +64,95 @@ class AdminController extends AbstractController
 
         return $this->render(
             'admin/user.html.twig',
-            ['pagination' => $pagination]
+            [
+                'pagination' => $pagination,
+            ]
+        );
+    }
+
+    /**
+     * Grant roles action.
+     *
+     * @param Request        $request
+     * @param UserRepository $repository
+     * @param User           $user
+     *
+     * @return Response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/user/{id}/grant",
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="admin_user_grant",
+     * )
+     */
+    public function grantRoles(Request $request, UserRepository $repository, User $user): Response
+    {
+        $form = $this->createForm(FormType::class, $user, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setUpdatedAt(new \DateTime());
+            $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+            $repository->save($user);
+
+            $this->addFlash('success', 'message.granted_successfully');
+
+            return $this->redirectToRoute('admin_list_users');
+        }
+
+        return $this->render(
+            'admin/user-grant.html.twig',
+            [
+                    'form' => $form->createView(),
+                    'user' => $user,
+                ]
+        );
+    }
+
+    /**
+     * Toggle status action.
+     *
+     * @param Request        $request
+     * @param UserRepository $repository
+     * @param User           $user
+     *
+     * @return Response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/user/{id}/toggle-status",
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="admin_user_status",
+     * )
+     */
+    public function toggleStatus(Request $request, UserRepository $repository, User $user): Response
+    {
+        $form = $this->createForm(FormType::class, $user, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $status = !($user->getIsActive());
+
+            $user->setUpdatedAt(new \DateTime());
+            $user->setIsActive($status);
+            $repository->save($user);
+
+            $this->addFlash('success', 'message.toggled_successfully');
+
+            return $this->redirectToRoute('admin_list_users');
+        }
+
+        return $this->render(
+            'admin/user-toggle.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user,
+            ]
         );
     }
 
@@ -84,12 +172,6 @@ class AdminController extends AbstractController
      */
     public function listArticles(Request $request, ArticleRepository $repository, PaginatorInterface $paginator): Response
     {
-        if ($request->query->getAlnum('filter')) {
-            $queryBuilder
-                ->where('bp.title LIKE :title')
-                ->setParameter('title', '%' . $request->query->getAlnum('filter') . '%');
-        }
-
         $pagination = $paginator->paginate(
             $repository->queryAll(),
             $request->query->getInt('page', 1),

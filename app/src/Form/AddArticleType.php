@@ -6,6 +6,9 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\Tag;
+use App\Form\DataTransformer\TagsDataTransformer;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,6 +19,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class AddArticleType extends AbstractType
 {
+    /**
+     * Tags data transformer.
+     *
+     * @var \App\Form\DataTransformer\TagsDataTransformer|null
+     */
+    private $tagsDataTransformer = null;
+
+    /**
+     * AddArticleType constructor.
+     *
+     * @param \App\Form\DataTransformer\TagsDataTransformer $tagsDataTransformer Tags data transformer
+     */
+    public function __construct(TagsDataTransformer $tagsDataTransformer)
+    {
+        $this->tagsDataTransformer = $tagsDataTransformer;
+    }
+
+
     /**
      * Builds the form.
      *
@@ -34,11 +55,26 @@ class AddArticleType extends AbstractType
                 'title',
                 TextType::class,
                 [
-                'label' => 'label.title',
-                'required' => true,
-                'attr' => ['max_length' => 255],
+                    'label' => 'label.title',
+                    'required' => true,
+                    'attr' => ['max_length' => 255],
+                ]
+            )
+            ->add(
+                'tags',
+                TextType::class,
+                [
+                    'label' => 'label.tags',
+                    'required' => false,
+                    'attr' => [
+                        'max_length' => 255,
+                    ],
                 ]
             );
+
+        $builder->get('tags')->addModelTransformer(
+            $this->tagsDataTransformer
+        );
     }
 
     /**

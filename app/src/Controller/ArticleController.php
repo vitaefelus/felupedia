@@ -19,6 +19,7 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -142,9 +143,9 @@ class ArticleController extends AbstractController
      * Add Paragraph action.
      *
      * @param Request             $request             HTTP request
-     * @param ParagraphRepository $paragraphRepository
-     * @param ArticleRepository   $articleRepository
-     * @param $id
+     * @param ParagraphRepository $paragraphRepository Paragraph repository
+     * @param ArticleRepository   $articleRepository   Article repository
+     * @param                     $id
      *
      * @return Response HTTP response
      *
@@ -160,9 +161,15 @@ class ArticleController extends AbstractController
      */
     public function addParagraph(Request $request, ParagraphRepository $paragraphRepository, ArticleRepository $articleRepository, $id): Response
     {
-        $paragraph = new Paragraph();
         $article = $articleRepository->find($id);
 
+        if ($article->getAuthor() !== $this->getUser()) {
+            $this->addFlash('warning', 'message.item_not_found');
+
+            return $this->redirectToRoute('article_view', ['id' => $id]);
+        }
+
+        $paragraph = new Paragraph();
         $form = $this->createForm(ParagraphType::class, $paragraph);
         $form->handleRequest($request);
 
@@ -170,7 +177,7 @@ class ArticleController extends AbstractController
             $paragraph->setArticle($article);
             $paragraphRepository->save($paragraph);
 
-            return $this->redirectToRoute('article_view', ['id' => $article->getId()]);
+            return $this->redirectToRoute('article_view', ['id' => $id]);
         }
 
         return $this->render(
@@ -178,6 +185,104 @@ class ArticleController extends AbstractController
             [
                 'form' => $form->createView(),
                 'article' => $article,
+            ]
+        );
+    }
+
+    /**
+     * Edit Paragraph action.
+     *
+     * @param Request $request    HTTP request
+     * @param Paragraph                                 $paragraph
+     * @param ParagraphRepository                       $repository Paragraph repository
+     *
+     * @return Response HTTP response
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     *
+     * @Route(
+     *     "/{id}/{paragraph}/edit",
+     *     methods={"GET", "POST", "PUT"},
+     *     requirements={
+     *        "id": "[1-9]\d*",
+     *        "paragraph": "[1-9]\d*"
+     *     },
+     *     name="article_edit_paragraph",
+     * )
+     */
+    public function editParagraph(Request $request, Paragraph $paragraph, ParagraphRepository $repository): Response
+    {
+        if ($paragraph->getArticle()->getAuthor() !== $this->getUser()) {
+            $this->addFlash('warning', 'message.forbidden');
+
+            return $this->redirectToRoute('article_view', ['id' => $paragraph->getArticle()->getId()]);
+        }
+        $form = $this->createForm(ParagraphType::class, $paragraph, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $repository->save($paragraph);
+
+            $this->addFlash('success', 'message.updated_successfully');
+
+            return $this->redirectToRoute('article_view', ['id' => $paragraph->getArticle()->getId()]);
+        }
+
+        return $this->render(
+            'article/edit-paragraph.html.twig',
+            [
+                'form' => $form->createView(),
+                'paragraph' => $paragraph,
+                'article' => $paragraph->getArticle(),
+            ]
+        );
+    }
+
+    /**
+     * Delete action.
+     *
+     * @param Request             $request    HTTP request
+     * @param Paragraph           $paragraph  Paragraph entity
+     * @param ParagraphRepository $repository Paragraph repository
+     *
+     * @return Response HTTP response
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     *
+     * @Route(
+     *     "/{id}/{paragraph}/delete",
+     *     methods={"GET", "DELETE"},
+     *     requirements={
+     *        "id": "[1-9]\d*",
+     *        "paragraph": "[1-9]\d*"
+     *     },
+     *     name="article_delete_paragraph",
+     * )
+     */
+    public function delete(Request $request, Paragraph $paragraph, ParagraphRepository $repository): Response
+    {
+        $form = $this->createForm(FormType::class, $paragraph, ['method' => 'DELETE']);
+        $form->handleRequest($request);
+
+        if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
+            $form->submit($request->request->get($form->getName()));
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $repository->delete($paragraph);
+            $this->addFlash('success', 'message.deleted_successfully');
+
+            return $this->redirectToRoute('article_view', ['id' => $paragraph->getArticle()->getId()]);
+        }
+
+        return $this->render(
+            'article/delete-paragraph.html.twig',
+            [
+                'form' => $form->createView(),
+                'paragraph' => $paragraph,
+                'article' => $paragraph->getArticle(),
             ]
         );
     }

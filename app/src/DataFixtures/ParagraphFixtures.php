@@ -44,9 +44,9 @@ class ParagraphFixtures extends AbstractBaseFixtures implements DependentFixture
      */
     public function getDependencies(): array
     {
-        return array(
+        return [
             ArticleFixtures::class,
             PictureFixtures::class,
-        );
+        ];
     }
 }

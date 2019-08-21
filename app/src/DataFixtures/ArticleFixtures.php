@@ -49,8 +49,8 @@ class ArticleFixtures extends AbstractBaseFixtures implements DependentFixtureIn
      */
     public function getDependencies(): array
     {
-        return array(
+        return [
             TagFixtures::class,
-        );
+        ];
     }
 }

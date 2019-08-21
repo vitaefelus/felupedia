@@ -24,9 +24,8 @@ class Paragraph
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert/NotBlank
-     *
-     * @Assert/Length(
+     * @Assert\NotBlank()
+     * @Assert\Length(
      *      max = 255,
      *      maxMessage = "{{ 'error.too_short'|trans }}"
      * )
@@ -36,7 +35,7 @@ class Paragraph
     /**
      * @ORM\Column(type="text")
      *
-     * @Assert/NotBlank
+     * @Assert\NotBlank()
      */
     private $textContent;
 

@@ -69,6 +69,7 @@ class ProfileController extends AbstractController
      *     name="profile_change_password",
      *     requirements={"id": "[1-9]\d*"},
      * )
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function changePassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, UserRepository $repository, $id): Response

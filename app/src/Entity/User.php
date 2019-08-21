@@ -446,6 +446,7 @@ class User implements UserInterface
 
         return $this;
     }
+
     /**
      * Getter for the newPassword.
      *
@@ -455,6 +456,7 @@ class User implements UserInterface
     {
         return $this->newPassword;
     }
+
     /**
      * Setter for the newPassword.
      *

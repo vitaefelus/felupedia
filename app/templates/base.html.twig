@@ -22,7 +22,9 @@
                 <a class="nav-link" href="{{ url("article_index") }}">{{ 'navbar.articles'|trans }}<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
+                {% if is_granted('ROLE_ADMIN') %}
                 <a class="nav-link" href="{{ url("admin_index") }}">{{ 'navbar.admin'|trans }}</a>
+                {% endif %}
             </li>
         </ul>
         {% if app.user %}

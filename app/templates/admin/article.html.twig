@@ -8,7 +8,7 @@
     <div class="container container-fix">
         <h1>{{ 'title.article_list'|trans }}</h1>
         <div class="action-buttons">
-            <a class="btn btn-red" href="{{ path("admin_list_not_accepted_articles") }}">{{ 'button.view_not_accepted' }}</a>
+            <a class="btn btn-red" href="{{ path("admin_list_not_accepted_articles") }}">{{ 'button.view_not_accepted'|trans }}</a>
         </div>
         {% if pagination is defined and pagination|length %}
 
@@ -29,7 +29,7 @@
                 </thead>
                 <tbody>
                 {% for article in pagination %}
-                    {% if article.getParagraphs()|length %}
+
                         <tr>
                             <td>{{ article.createdAt|localizeddate }}</td>
                             <td>{{ article.updatedAt|localizeddate }}</td>
@@ -54,7 +54,7 @@
                             {% endif %}
                             </td>
                         </tr>
-                    {% endif %}
+
                 {% endfor %}
                 </tbody>
             </table>

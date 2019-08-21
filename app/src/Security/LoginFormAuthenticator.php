@@ -129,7 +129,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         }
 
         return $this->userRepository->findOneBy(
-            ['username' => $credentials['username']]
+            [
+                'username' => $credentials['username'],
+                'isActive' => 1
+            ]
         );
     }
 

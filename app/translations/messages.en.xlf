@@ -34,6 +34,10 @@
                 <source>label.actions</source>
                 <target>Actions</target>
             </trans-unit>
+            <trans-unit id="label.email">
+                <source>label.email</source>
+                <target>Email</target>
+            </trans-unit>
             <trans-unit id="action.view">
                 <source>action.view</source>
                 <target>View</target>
@@ -226,6 +230,10 @@
                 <source>label.password</source>
                 <target>Password</target>
             </trans-unit>
+            <trans-unit id="label.repeat_password">
+                <source>label.repeat_password</source>
+                <target>Repeat password</target>
+            </trans-unit>
             <trans-unit id="action.login">
                 <source>action.login</source>
                 <target>Log in</target>
@@ -257,6 +265,26 @@
             <trans-unit id="title.user_toggle">
                 <source>title.user_toggle</source>
                 <target>Toggle status</target>
+            </trans-unit>
+            <trans-unit id="action.delete">
+                <source>action.delete</source>
+                <target>Delete</target>
+            </trans-unit>
+            <trans-unit id="label.new_password">
+                <source>label.new_password</source>
+                <target>New Password</target>
+            </trans-unit>
+            <trans-unit id="label.repeat_new_password">
+                <source>label.repeat_new_password</source>
+                <target>Repeat New Password</target>
+            </trans-unit>
+            <trans-unit id="button.view_not_accepted">
+                <source>button.view_not_accepted</source>
+                <target>View Not Accepted</target>
+            </trans-unit>
+            <trans-unit id="error.not_found">
+                <source>error.not_found</source>
+                <target>Not found</target>
             </trans-unit>
         </body>
     </file>

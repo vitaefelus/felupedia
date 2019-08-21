@@ -6,6 +6,7 @@
 
 {% block body %}
     <div class="container container-article container-fix">
+    {% if article.isAccepted == 1 or app.user == article.getAuthor() %}
         <h1 class="article">{{ article.title }}</h1>
         <span class="author">{{ article.getAuthor().username }}</span>
         <hr>
@@ -54,5 +55,8 @@
                     </div>
                 {% endfor %}
         {% endif %}
+    {% else %}
+        <p>{{ 'error.not_found'|trans }}</p>
+    {% endif %}
     </div>
 {% endblock %}

@@ -250,6 +250,10 @@
                 <source>label.toggle_status</source>
                 <target>Przełącz status</target>
             </trans-unit>
+            <trans-unit id="label.repeat_password">
+                <source>label.repeat_password</source>
+                <target>Powtórz hasło</target>
+            </trans-unit>
             <trans-unit id="title.user_grant">
                 <source>title.user_grant</source>
                 <target>Dodaj przywileje</target>
@@ -262,7 +266,22 @@
                 <source>action.delete</source>
                 <target>Usuń</target>
             </trans-unit>
-
+            <trans-unit id="label.new_password">
+                <source>label.new_password</source>
+                <target>Nowe hasło</target>
+            </trans-unit>
+            <trans-unit id="label.repeat_new_password">
+                <source>label.repeat_new_password</source>
+                <target>Powtórz nowe hasło</target>
+            </trans-unit>
+            <trans-unit id="button.view_not_accepted">
+                <source>button.view_not_accepted</source>
+                <target>Wyświetl niezaakceptowane</target>
+            </trans-unit>
+            <trans-unit id="error.not_found">
+                <source>error.not_found</source>
+                <target>Nie znaleziono</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

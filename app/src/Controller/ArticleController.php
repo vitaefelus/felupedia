@@ -83,7 +83,7 @@ class ArticleController extends AbstractController
      */
     public function view(Article $article): Response
     {
-        if ('0' === $article->getIsAccepted()) {
+        if (0 === $article->getIsAccepted()) {
             $this->addFlash('warning', 'message.item_not_found');
 
             return $this->redirectToRoute('article_index');

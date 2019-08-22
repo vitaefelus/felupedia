@@ -94,11 +94,15 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (array_key_exists('ROLE_ADMIN', $user->getRoles()) === false) {
-                $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+            $helper_array = $user->getRoles();
+
+            if (in_array('ROLE_ADMIN', $helper_array) === false) {
+                $helper_array[] = 'ROLE_ADMIN';
+                $user->setRoles($helper_array);
             } else {
-                $user->setRoles(['ROLE_USER']);
+                $user->setRoles(array_diff($helper_array, ['ROLE_ADMIN']));
             }
+
             $user->setUpdatedAt(new \DateTime());
             $repository->save($user);
 

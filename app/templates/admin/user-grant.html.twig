@@ -6,7 +6,7 @@
 
 {% block body %}
     <div class="container container-fix">
-        <h1>{{ 'title.user_grant'|trans }}{{ user.username }}</h1>
+        <h1>{{ 'title.user_grant'|trans }} {{ user.username }}</h1>
         {{ form_start(form, { method: 'PUT', action: url('admin_user_grant', {id: user.id}) }) }}
         {{ form_widget(form) }}
         <div class="form-group row float-sm-right">

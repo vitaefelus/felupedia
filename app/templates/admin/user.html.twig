@@ -48,13 +48,9 @@
                             {% endfor %}
                         </td>
                         <td>
-                            {% for role in user.getRoles() %}
-                                {% if role != 'ROLE_ADMIN' %}
-                                    <a href="{{ url('admin_user_grant', {id: user.id}) }}" title="{{ 'action.accept'|trans }}">
-                                        {{ 'action.accept'|trans }}
-                                    </a>
-                                {% endif %}
-                            {% endfor %}
+                            <a href="{{ url('admin_user_grant', {id: user.id}) }}" title="{{ 'action.accept'|trans }}">
+                                {{ 'action.accept'|trans }}
+                            </a>
                         </td>
                         <td>
                             <a href="{{ url('admin_user_status', {id: user.id}) }}" title="{{ 'action.accept'|trans }}">

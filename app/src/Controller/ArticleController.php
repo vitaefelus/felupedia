@@ -112,7 +112,7 @@ class ArticleController extends AbstractController
      *     name="article_new",
      * )
      */
-    public function new(Request $request, ArticleRepository $repository): Response
+    public function add(Request $request, ArticleRepository $repository): Response
     {
         $article = new Article();
 

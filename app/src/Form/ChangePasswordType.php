@@ -18,6 +18,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ChangePasswordType extends AbstractType
 {
     /**
+     * Builds form.
+     *
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
@@ -33,6 +35,8 @@ class ChangePasswordType extends AbstractType
     }
 
     /**
+     * Setting options, e.g. validation groups.
+     *
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
@@ -46,6 +50,8 @@ class ChangePasswordType extends AbstractType
     }
 
     /**
+     * Get block prefix.
+     *
      * @return string
      */
     public function getBlockPrefix(): string

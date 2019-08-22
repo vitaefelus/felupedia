@@ -45,7 +45,7 @@ class UserFixtures extends AbstractBaseFixtures
             $user->setFirstName($this->faker->firstName);
             $user->setLastName($this->faker->lastName);
             $user->setTitle($this->faker->jobTitle);
-            $user->setIsActive($this->faker->boolean);
+            $user->setIsActive(true);
             $user->setRoles(['ROLE_USER']);
             $user->setPassword($this->passwordEncoder->encodePassword(
                 $user,

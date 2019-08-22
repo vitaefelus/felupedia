@@ -20,6 +20,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class UserType extends AbstractType
 {
     /**
+     * Builds form.
+     *
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
@@ -50,6 +52,8 @@ class UserType extends AbstractType
     }
 
     /**
+     * Configure options.
+     *
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)

@@ -24,7 +24,7 @@ class PictureFixtures extends AbstractBaseFixtures
     {
         $this->createMany(20, 'pictures', function ($i) {
             $picture = new Picture();
-            $pictureValue = 0 === $i % 2 ? 'fixture.jpg' : '';
+            $pictureValue = 'fixture.jpg';
             $picture->setSrc($pictureValue);
             $picture->setDescription($this->faker->sentence);
 

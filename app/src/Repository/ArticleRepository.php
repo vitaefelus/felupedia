@@ -14,6 +14,8 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
+ * Article repository class.
+ *
  * @method Article|null find($id, $lockMode = null, $lockVersion = null)
  * @method Article|null findOneBy(array $criteria, array $orderBy = null)
  * @method Article[]    findAll()
@@ -54,6 +56,8 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
+     * Queries accepted articles.
+     *
      * @return QueryBuilder
      */
     public function queryAccepted(): QueryBuilder
@@ -64,6 +68,8 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
+     * Queries records by user defined filter.
+     *
      * @param Request $request
      *
      * @return QueryBuilder
@@ -77,6 +83,8 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
+     * Saves record to database.
+     *
      * @param Article $article
      *
      * @throws ORMException

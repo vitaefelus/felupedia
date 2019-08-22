@@ -12,6 +12,8 @@ use Doctrine\ORM\ORMException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
+ * Paragraph repository class.
+ *
  * @method Paragraph|null find($id, $lockMode = null, $lockVersion = null)
  * @method Paragraph|null findOneBy(array $criteria, array $orderBy = null)
  * @method Paragraph[]    findAll()

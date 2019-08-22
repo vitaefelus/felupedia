@@ -286,6 +286,14 @@
                 <source>error.not_found</source>
                 <target>Not found</target>
             </trans-unit>
+            <trans-unit id="label.toggle_privileges">
+                <source>label.toggle_privileges</source>
+                <target>Toggle privilege</target>
+            </trans-unit>
+            <trans-unit id="title.user_toggle_privilege">
+                <source>title.user_toggle_privilege</source>
+                <target>Toggle privilege for</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

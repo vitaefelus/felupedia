@@ -10,6 +10,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
+ * Picture repository class.
+ *
  * @method Picture|null find($id, $lockMode = null, $lockVersion = null)
  * @method Picture|null findOneBy(array $criteria, array $orderBy = null)
  * @method Picture[]    findAll()
